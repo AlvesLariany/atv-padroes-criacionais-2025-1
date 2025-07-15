@@ -1,10 +1,13 @@
 package br.edu.ifpb.ads.padroes.atv1.rpg;
 
-public class Personagem {
+import br.edu.ifpb.ads.padroes.atv1.rpg.enums.ClassePersonagem;
+import br.edu.ifpb.ads.padroes.atv1.rpg.enums.RacaPersonagem;
+
+public class Personagem implements  Cloneable{
 
     private String nome;
-    private String raca;
-    private String classe;
+    private RacaPersonagem raca;
+    private ClassePersonagem classe;
     private int forca;
     private int inteligencia;
     private int agilidade;
@@ -14,7 +17,7 @@ public class Personagem {
     private Armadura armadura;
     private String[] habilidades;
 
-    public Personagem(String nome, String raca, String classe, int forca,
+    public Personagem(String nome, RacaPersonagem raca, ClassePersonagem classe, int forca,
                       int inteligencia, int agilidade, int vida, int mana,
                       Arma arma, Armadura armadura, String[] habilidades) {
         this.nome = nome;
@@ -30,16 +33,31 @@ public class Personagem {
         this.habilidades = habilidades;
     }
 
+
+    public Personagem clone(){
+
+        try{
+            Personagem clone = (Personagem) super.clone();
+            clone.habilidades = habilidades.clone();
+            clone.arma = arma.clone();
+            clone.armadura = armadura.clone();
+
+            return clone;
+        }
+        catch (CloneNotSupportedException error){
+            throw  new AssertionError();
+        }
+    }
     // Getters e Setters básicos
     public String getNome() {
         return nome;
     }
 
-    public String getRaca() {
+    public RacaPersonagem getRaca() {
         return raca;
     }
 
-    public String getClasse() {
+    public ClassePersonagem getClasse() {
         return classe;
     }
 
